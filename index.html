@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Abir ❤️ Tahmina</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Raleway:wght@300;400;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --blue: #4fc3f7;
+      --blue-dark: #0d47a1;
+      --blue-glow: rgba(79,195,247,0.4);
+      --red: #ef5350;
+      --red-dark: #b71c1c;
+      --red-glow: rgba(239,83,80,0.4);
+      --pink: #ff4081;
+      --bg1: #040d1a;
+      --bg2: #0a0010;
+      --bg3: #1a0000;
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    body {
+      font-family: 'Raleway', sans-serif;
+      background: var(--bg1);
+      color: #fff;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── SPLASH ── */
+    #splash {
+      position: fixed; inset: 0; z-index: 100;
+      background: linear-gradient(135deg, var(--bg1) 0%, var(--bg2) 50%, var(--bg3) 100%);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      cursor: pointer;
+      transition: opacity 0.8s ease;
+    }
+    #splash.hidden { opacity: 0; pointer-events: none; }
+
+    .splash-rose {
+      font-size: 4rem;
+      animation: sway 3s ease-in-out infinite;
+      margin-bottom: 1.5rem;
+      filter: drop-shadow(0 0 20px var(--red-glow));
+    }
+    @keyframes sway {
+      0%,100% { transform: rotate(-8deg) scale(1); }
+      50%      { transform: rotate(8deg) scale(1.08); }
+    }
+
+    .splash-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 8vw, 4rem);
+      font-weight: 600;
+      letter-spacing: 2px;
+      margin-bottom: 1rem;
+    }
+    .s-blue { color: var(--blue); text-shadow: 0 0 25px var(--blue-glow); }
+    .s-red  { color: var(--red);  text-shadow: 0 0 25px var(--red-glow); }
+
+    .splash-tap {
+      font-size: 0.85rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      animation: blink 2s ease-in-out infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:.45} 50%{opacity:1} }
+
+    /* ripple rings on splash */
+    .rings { position:absolute; inset:0; pointer-events:none; }
+    .ring {
+      position:absolute; top:50%; left:50%;
+      transform:translate(-50%,-50%);
+      border-radius:50%;
+      border:1px solid rgba(255,255,255,0.08);
+      animation: expand 4s ease-out infinite;
+    }
+    .ring:nth-child(1){ width:200px; height:200px; animation-delay:0s; }
+    .ring:nth-child(2){ width:340px; height:340px; animation-delay:1s; }
+    .ring:nth-child(3){ width:480px; height:480px; animation-delay:2s; }
+    @keyframes expand {
+      0%  { opacity:.6; transform:translate(-50%,-50%) scale(.8); }
+      100%{ opacity:0;  transform:translate(-50%,-50%) scale(1.3); }
+    }
+
+    /* ── MAIN PAGE ── */
+    #main { opacity:0; transition: opacity 1s ease; }
+    #main.visible { opacity:1; }
+
+    /* stars */
+    #stars {
+      position:fixed; inset:0; pointer-events:none; z-index:0;
+    }
+    .star {
+      position:absolute; border-radius:50%; background:#fff;
+      animation: twinkle ease-in-out infinite;
+    }
+    @keyframes twinkle {
+      0%,100%{opacity:.15; transform:scale(1)}
+      50%{opacity:.9; transform:scale(1.5)}
+    }
+
+    /* floating petals */
+    #petals { position:fixed; inset:0; pointer-events:none; z-index:0; }
+    .petal {
+      position:absolute; font-size:1rem; opacity:0;
+      animation: floatPetal linear infinite;
+    }
+    @keyframes floatPetal {
+      0%  { transform:translateY(105vh) rotate(0deg);   opacity:0; }
+      10% { opacity:.5; }
+      90% { opacity:.2; }
+      100%{ transform:translateY(-10vh) rotate(720deg); opacity:0; }
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position:relative; z-index:1;
+      min-height:100vh;
+      display:flex; flex-direction:column;
+      align-items:center; justify-content:center;
+      text-align:center;
+      padding:3rem 1.5rem 2rem;
+      background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.3) 100%);
+    }
+
+    .hero-flower {
+      font-size:3.5rem; margin-bottom:1rem;
+      filter: drop-shadow(0 0 15px var(--red-glow));
+      animation: pulse 2.5s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%,100%{transform:scale(1)} 50%{transform:scale(1.12)}
+    }
+
+    .hero-subtitle {
+      font-size:0.7rem; letter-spacing:5px;
+      text-transform:uppercase;
+      color:rgba(255,255,255,0.4);
+      margin-bottom:1rem;
+    }
+
+    .hero-names {
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(2.8rem,10vw,5.5rem);
+      font-weight:600; line-height:1.1;
+      margin-bottom:0.5rem;
+    }
+    .n-blue { color:var(--blue); text-shadow:0 0 30px var(--blue-glow),0 0 60px rgba(79,195,247,.2); }
+    .n-heart { color:var(--pink); animation:heartbeat 1.4s ease-in-out infinite; display:inline-block; font-size:.8em; }
+    .n-red  { color:var(--red);  text-shadow:0 0 30px var(--red-glow),0 0 60px rgba(239,83,80,.2); }
+    @keyframes heartbeat {
+      0%,100%{transform:scale(1)} 14%{transform:scale(1.3)} 28%{transform:scale(1)} 42%{transform:scale(1.2)} 70%{transform:scale(1)}
+    }
+
+    .hero-tagline {
+      font-family:'Cormorant Garamond',serif;
+      font-style:italic; font-size:clamp(.9rem,2.5vw,1.2rem);
+      color:rgba(255,255,255,.5); margin-bottom:3rem;
+    }
+
+    .scroll-hint {
+      font-size:.7rem; letter-spacing:3px; text-transform:uppercase;
+      color:rgba(255,255,255,.3); animation:bounce 2s ease-in-out infinite;
+    }
+    @keyframes bounce {
+      0%,100%{transform:translateY(0)} 50%{transform:translateY(8px)}
+    }
+
+    /* ── SECTION WRAPPER ── */
+    section {
+      position:relative; z-index:1;
+      padding:4rem 1.5rem;
+      max-width:700px; margin:0 auto;
+      text-align:center;
+    }
+
+    .section-flower {
+      font-size:2rem; margin-bottom:1rem;
+      filter:drop-shadow(0 0 10px var(--red-glow));
+    }
+
+    .section-title {
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(1.4rem,4vw,2rem);
+      color:#fff; margin-bottom:.5rem; letter-spacing:1px;
+    }
+
+    .divider-line {
+      width:80px; height:1px; margin:1rem auto;
+      background:linear-gradient(90deg, transparent, var(--blue), var(--red), transparent);
+    }
+
+    /* ── TIMER CARD ── */
+    .timer-card {
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:24px;
+      padding:2.5rem 1.5rem;
+      backdrop-filter:blur(16px);
+      box-shadow:0 8px 48px rgba(0,0,0,.5),
+                 inset 0 1px 0 rgba(255,255,255,.07);
+      margin:2rem 0;
+    }
+
+    .timer-top {
+      display:grid; grid-template-columns:repeat(3,1fr); gap:1.2rem;
+      margin-bottom:1.5rem;
+    }
+    .timer-bottom {
+      display:grid; grid-template-columns:repeat(3,1fr); gap:1.2rem;
+    }
+
+    .t-block { display:flex; flex-direction:column; align-items:center; }
+
+    .t-val {
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(2rem,7vw,3.2rem);
+      font-weight:600; line-height:1; margin-bottom:.3rem;
+    }
+    .t-label {
+      font-size:.6rem; letter-spacing:2px;
+      text-transform:uppercase; color:rgba(255,255,255,.4);
+    }
+
+    /* color per block */
+    .t-years   .t-val { color:var(--blue);    text-shadow:0 0 20px var(--blue-glow); }
+    .t-months  .t-val { color:#90caf9;         text-shadow:0 0 20px rgba(144,202,249,.4); }
+    .t-days    .t-val { color:var(--red);      text-shadow:0 0 20px var(--red-glow); }
+    .t-hours   .t-val { color:#ef9a9a;         text-shadow:0 0 20px rgba(239,154,154,.4); }
+    .t-minutes .t-val { color:#80cbc4;         text-shadow:0 0 20px rgba(128,203,196,.4); }
+    .t-seconds .t-val { color:#ffe082;         text-shadow:0 0 20px rgba(255,224,130,.4); }
+
+    .since-text {
+      font-size:.8rem; letter-spacing:2px;
+      text-transform:uppercase; color:rgba(255,255,255,.35);
+      margin-top:1.5rem;
+    }
+    .total-days-text {
+      margin-top:.6rem; font-size:.9rem;
+      color:rgba(255,255,255,.5);
+    }
+    .total-days-text strong { color:var(--pink); font-size:1.1rem; }
+
+    /* ── QUOTE ── */
+    .quote-section {
+      padding:3rem 1.5rem 5rem;
+      max-width:600px; margin:0 auto; text-align:center;
+      position:relative; z-index:1;
+    }
+    .quote-mark {
+      font-family:'Cormorant Garamond',serif;
+      font-size:5rem; line-height:.8;
+      color:rgba(255,255,255,.08);
+    }
+    .quote-text {
+      font-family:'Cormorant Garamond',serif;
+      font-style:italic; font-size:clamp(1.1rem,3vw,1.5rem);
+      color:rgba(255,255,255,.7); line-height:1.8;
+      margin:.5rem 0;
+    }
+    .quote-author {
+      font-size:.75rem; letter-spacing:3px;
+      text-transform:uppercase; color:rgba(255,255,255,.3);
+      margin-top:1rem;
+    }
+    .footer-text {
+      font-size:.7rem; letter-spacing:2px;
+      text-transform:uppercase; color:rgba(255,255,255,.2);
+      margin-top:2rem;
+    }
+  </style>
+</head>
+<body>
+
+<!-- SPLASH -->
+<div id="splash" onclick="enterSite()">
+  <div class="rings">
+    <div class="ring"></div><div class="ring"></div><div class="ring"></div>
+  </div>
+  <div class="splash-rose">🌹</div>
+  <div class="splash-title">
+    <span class="s-blue">Abir</span> ❤️ <span class="s-red">Tahmina</span>
+  </div>
+  <p style="font-size:.85rem;color:rgba(255,255,255,.35);margin:.5rem 0 2rem;letter-spacing:2px;">Our Love Story</p>
+  <div class="splash-tap">Touch to enter ✨</div>
+</div>
+
+<!-- MAIN -->
+<div id="main">
+  <div id="stars"></div>
+  <div id="petals"></div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-flower">🌸</div>
+    <div class="hero-subtitle">Our Love Story</div>
+    <div class="hero-names">
+      <span class="n-blue">Abir</span>
+      <span class="n-heart"> ❤️ </span>
+      <span class="n-red">Tahmina</span>
+    </div>
+    <div class="hero-tagline">Every moment with you is a treasure</div>
+    <div class="scroll-hint">↓ scroll down ↓</div>
+  </div>
+
+  <!-- TIMER -->
+  <section>
+    <div class="section-flower">🌸</div>
+    <div class="section-title">We have been together for</div>
+    <div class="divider-line"></div>
+
+    <div class="timer-card">
+      <div class="timer-top">
+        <div class="t-block t-years">
+          <div class="t-val" id="years">0</div>
+          <div class="t-label">Years</div>
+        </div>
+        <div class="t-block t-months">
+          <div class="t-val" id="months">0</div>
+          <div class="t-label">Months</div>
+        </div>
+        <div class="t-block t-days">
+          <div class="t-val" id="days">0</div>
+          <div class="t-label">Days</div>
+        </div>
+      </div>
+      <div class="timer-bottom">
+        <div class="t-block t-hours">
+          <div class="t-val" id="hours">00</div>
+          <div class="t-label">Hours</div>
+        </div>
+        <div class="t-block t-minutes">
+          <div class="t-val" id="minutes">00</div>
+          <div class="t-label">Minutes</div>
+        </div>
+        <div class="t-block t-seconds">
+          <div class="t-val" id="seconds">00</div>
+          <div class="t-label">Seconds</div>
+        </div>
+      </div>
+
+      <div class="since-text">Since October 23, 2022 🌹</div>
+      <div class="total-days-text">
+        <strong id="totalDays">0</strong> days of love together 💙❤️
+      </div>
+    </div>
+  </section>
+
+  <!-- QUOTE -->
+  <div class="quote-section">
+    <div class="divider-line"></div>
+    <div class="quote-mark">"</div>
+    <div class="quote-text">You are my today and all of my tomorrows.</div>
+    <div class="quote-author">— Leo Christopher</div>
+    <div class="footer-text">Made with love, for always 🌹</div>
+  </div>
+</div>
+
+<script>
+  // Enter site
+  function enterSite() {
+    document.getElementById('splash').classList.add('hidden');
+    setTimeout(() => {
+      document.getElementById('main').classList.add('visible');
+    }, 400);
+  }
+
+  // Stars
+  const starsEl = document.getElementById('stars');
+  for (let i = 0; i < 100; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    const sz = Math.random() * 2.5 + 0.5;
+    s.style.cssText = `width:${sz}px;height:${sz}px;top:${Math.random()*100}%;left:${Math.random()*100}%;animation-duration:${Math.random()*3+2}s;animation-delay:${Math.random()*5}s;`;
+    starsEl.appendChild(s);
+  }
+
+  // Petals
+  const petalsEl = document.getElementById('petals');
+  const petalEmojis = ['🌸','❤️','💙','✨','💕','🌹','💫'];
+  for (let i = 0; i < 20; i++) {
+    const p = document.createElement('div');
+    p.className = 'petal';
+    p.textContent = petalEmojis[Math.floor(Math.random() * petalEmojis.length)];
+    p.style.cssText = `left:${Math.random()*100}%;font-size:${Math.random()*1.2+0.6}rem;animation-duration:${Math.random()*12+10}s;animation-delay:${Math.random()*12}s;`;
+    petalsEl.appendChild(p);
+  }
+
+  // Timer
+  const start = new Date('2022-10-23T00:00:00');
+  function update() {
+    const now = new Date();
+    let y = now.getFullYear() - start.getFullYear();
+    let mo = now.getMonth() - start.getMonth();
+    let d = now.getDate() - start.getDate();
+    if (d < 0) { mo--; d += new Date(now.getFullYear(), now.getMonth(), 0).getDate(); }
+    if (mo < 0) { y--; mo += 12; }
+
+    const totalMs = now - start;
+    const totalSec = Math.floor(totalMs / 1000);
+    const sec = totalSec % 60;
+    const min = Math.floor(totalSec / 60) % 60;
+    const hr  = Math.floor(totalSec / 3600) % 24;
+    const totalDays = Math.floor(totalMs / 86400000);
+
+    const pad = n => String(n).padStart(2,'0');
+    document.getElementById('years').textContent   = y;
+    document.getElementById('months').textContent  = mo;
+    document.getElementById('days').textContent    = d;
+    document.getElementById('hours').textContent   = pad(hr);
+    document.getElementById('minutes').textContent = pad(min);
+    document.getElementById('seconds').textContent = pad(sec);
+    document.getElementById('totalDays').textContent = totalDays.toLocaleString();
+  }
+  update();
+  setInterval(update, 1000);
+</script>
+</body>
+  </html>
+                                      
